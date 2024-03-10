@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@100&family=Gowun+Dodum&family=Inter&family=Kanit:wght@100&family=Karla:wght@200&family=Nanum+Myeongjo&family=Nanum+Pen+Script&family=Orbit&family=Oswald:wght@200&family=Timmana&display=swap');
+
+* {
+  margin: 0;
+  padding: 0; 
+  overflow: hidden;
+}
+
+body, html {
+  height: 100%;
+  background: #265073;
+  box-shadow: 10px 2px 1px rgba(0, 0, 0, 1);
+  font-family: 'Gowun Dodum';
+}
+
+.item {
+  background: white;
+  padding: 8px;
+  margin: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.dragging {
+  background: #ddddddd5;
+}
+.list{
+  background: lightgrey;
+  margin: 10px;
+  border-radius: 5px;
+  width: 50em;
+}
+
+.list.select {
+  text-align: center;
+  width: 30%;
+}
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 70%;
+  height: 98vh;
+  margin: 8px;
+}
+
+.wrap .view {
+  background-color: aqua;
+  flex: 2;
+  border-radius: 1em 1em 0 0;
+}
+
+.wrap .list_production {
+  background-color: #b9c3ce;
+  flex: 1;
+  border-radius: 0 0 1em 1em;
+}
+
+.search {
+  position: relative;
+  width: 100%;
+  border-radius: 10px;
+  margin: 10px auto;
+}
+
+input {
+  width: 100%;
+  border: 1px solid #bbb;
+  padding: 10px 12px;
+  font-size: 14px;
+  text-align: center;
+}
+
+img {
+  position: absolute;
+  width: 5%;
+  top: 15%;
+  left: 90%;
+  margin: 0;
+}
+
+.view {
+  position: relative;
+}
+
+.view .fa_soild{
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  display: inline-block;
+  width: 50%;
+  height: 50%;
+}
+
+.fa_soild_contianer {
+  background: white;
+  width: fit-content;
+  padding: 1em 2em;
+  border-radius: 10px;
+  transition: all 0.6s;
+}
