@@ -29,6 +29,7 @@ public class DateMemberRepository implements MemberRepository{
 
             pstmt = conn.prepareStatement(sql);
 
+            // 이거는 회원가입에서 받은 정보로 할거임
             pstmt.setInt(1, 1);
             pstmt.setString(2, "1234");
             pstmt.setString(3, "test@test.com");
