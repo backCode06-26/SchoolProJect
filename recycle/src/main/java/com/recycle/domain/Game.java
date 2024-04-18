@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class Game {
-    int id;
+    Long id;
     int gameScore;
 }
