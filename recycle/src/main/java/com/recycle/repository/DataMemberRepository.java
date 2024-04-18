@@ -1,5 +1,6 @@
 package com.recycle.repository;
 
+import com.recycle.domain.MemberDAO;
 import com.recycle.domain.UserDAO;
 
 import javax.sql.DataSource;
@@ -16,7 +17,7 @@ public class DataMemberRepository implements MemberRepository{
     }
 
     @Override
-    public void save() {
+    public void save(MemberDAO memberDAO) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -31,8 +32,8 @@ public class DataMemberRepository implements MemberRepository{
 
             // 이거는 회원가입에서 받은 정보로 할거임
             pstmt.setInt(1, 1);
-            pstmt.setString(2, "1234");
-            pstmt.setString(3, "test@test.com");
+            pstmt.setString(2, memberDAO.getEmail());
+            pstmt.setString(3, memberDAO.getPassword());
             pstmt.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
 
             // 쿼리 실행
