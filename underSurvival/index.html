@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Movement</title>
+    <style>
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(5, 100px);
+            gap: 10px;
+        }
+        .cell {
+            background-color: blue;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .block {
+            background-color: black;
+        }
+
+        .ladder {
+            background-color: brown;
+        }
+
+        .player {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="grid">
+        <div class="cell" id="x0y0">Cell 0-0</div>
+        <div class="cell" id="x1y0">Cell 1-0</div>
+        <div class="cell ladder" id="x2y0">Ladder 2-0</div>
+        <div class="cell" id="x0y1">Cell 0-1</div>
+        <div class="cell" id="x1y1">Cell 1-1</div>
+        <div class="cell ladder" id="x2y1">Ladder 2-1</div>
+        <div class="cell" id="x0y2">Cell 0-2</div>
+        <div class="cell" id="x1y2">Cell 1-2</div>
+        <div class="cell ladder" id="x2y2">Ladder 2-2</div>
+        <div class="cell" id="x0y3">Cell 0-3</div>
+        <div class="cell" id="x1y3">Cell 1-3</div>
+        <div class="cell ladder" id="x2y3">Ladder 2-3</div>
+        <div class="cell block" id="x0y4">Block 0-4</div>
+        <div class="cell block" id="x1y4">Block 1-4</div>
+        <div class="cell ladder" id="x2y4">Ladder 2-4</div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
