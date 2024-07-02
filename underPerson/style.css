@@ -1,0 +1,56 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(10, 50px);
+    grid-template-rows: repeat(10, 50px);
+    gap: 10px;
+    width: 590px;
+    height: 590px;
+}
+
+.cell {
+    width: 50px;
+    height: 50px;
+    border: 1px solid #ddd;
+}
+
+.Iron {
+    background-color: #b0c4de; /* Light Steel Blue */
+}
+
+.Silver {
+    background-color: #c0c0c0; /* Silver */
+}
+
+.Gold {
+    background-color: #ffd700; /* Gold */
+}
+
+.Diamond {
+    background-color: #b9f2ff; /* Diamond Blue */
+}
+
+.Wood {
+    background-color: #8b4513; /* Saddle Brown */
+}
+
+.Stone {
+    background-color: #808080; /* Gray */
+}
+
+.tool {
+    background-color: #a0a0a0;
+}
+
+.player {
+    background-color: #ff6347; /* Tomato */
+    border: 1px solid #333; /* Dark border */
+}
