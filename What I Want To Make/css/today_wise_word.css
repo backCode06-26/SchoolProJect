@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Nanum+Myeongjo&family=Nanum+Pen+Script&family=Orbit&family=Oswald:wght@200&family=Timmana&display=swap');
+
+.input_content {
+    display: flex;
+    justify-content: center;
+}
+
+.quote {
+    background-color: #FDE5D4;
+    border-radius: 1em;
+    font-family: 'Nanum Myeongjo';
+}
+
+
+.quote img {
+    width: 65em;
+    height: auto;
+    border-radius: 1em;
+}
+
+.quote h2 {
+    display: flex;
+    justify-content: center;
+    color: #001524;
+    font-family: 'Nanum Myeongjo';
+}
+
+.quote p {
+    display: flex;
+    justify-content: center;
+    font-size: 120%;
+    color: #001524;
+    font-family: 'Nanum Myeongjo';
+}
