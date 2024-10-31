@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카테고리 기반 이동구역</title>
+    <link rel="stylesheet" th:href="@{/css/planStyle.css}">
+    <style>
+        /* 기존 CSS */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: #f0f2f5;
+            overflow: auto;
+        }
+
+        .zone-container {
+            display: flex;
+            height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+            gap: 20px;
+        }
+
+        .zone {
+            border-radius: 8px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .move, .copy {
+            flex-grow: 1;
+            background-color: #e7f0ff;
+            border: 1px dashed #007bff;
+            overflow-y: auto;
+            overflow-x: hidden;
+            max-height: 100%;
+            position: relative;
+        }
+
+        .delete {
+            width: 100%;
+            background-color: #ffe7e7;
+            border: 1px dashed #dc3545;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .item, .draggable {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            border: 1px solid #007bff;
+            cursor: move;
+            background-color: #007bff;
+            color: #ffffff;
+            border-radius: 8px;
+            transition: background-color 0.3s, transform 0.3s;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        .item:hover {
+            background-color: #0056b3;
+            transform: scale(1.04);
+        }
+
+        .card:hover {
+            background-color: #dadde2;
+            transform: scale(1.04);
+        }
+
+        .text-wrapper {
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        .ico-drag {
+            margin-left: auto;
+            font-size: 18px;
+            order: 2;
+            cursor: move;
+        }
+
+        .card-container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .card {
+            height: 150px;
+            overflow: hidden;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: row;
+        }
+
+        .card-title {
+            color: black;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .card-details {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .fa-solid {
+            color: black;
+            text-align: left;
+        }
+
+        .form-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .form-container {
+            width: 60%;
+            height: 60%;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: auto;
+            max-width: 600px;
+            max-height: 600px;
+        }
+
+        .draggable.dragging {
+            opacity: 0.5;
+        }
+
+        .save-button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+    </style>
+    <script th:inline="javascript">
+        const groupId = /*[[${groupId}]]*/ 0;
+        const userId = /*[[${userId}]]*/ 0;
+    </script>
+    <script th:inline="javascript"
+            th:src="@{/js/planScript.js}"></script>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="zone-container">
+        <div class="zone move">
+            <p><strong>일정</strong></p>
+            <div id="item1" class="item draggable" draggable="true" data-category="업무">
+                <span class="ico-drag"></span>
+                <div>업무</div>
+            </div>
+            <div id="item2" class="item draggable" draggable="true" data-category="개인 개발">
+                <span class="ico-drag"></span>
+                <div>개인 개발</div>
+            </div>
+            <div id="item3" class="item draggable" draggable="true" data-category="운동">
+                <span class="ico-drag"></span>
+                <div>운동</div>
+            </div>
+            <div id="item4" class="item draggable" draggable="true" data-category="여행">
+                <span class="ico-drag"></span>
+                <div>여행</div>
+            </div>
+            <div id="item5" class="item draggable" draggable="true" data-category="사회 활동">
+                <span class="ico-drag"></span>
+                <div>사회 활동</div>
+            </div>
+            <div id="item6" class="item draggable" draggable="true" data-category="가족">
+                <span class="ico-drag"></span>
+                <div>가족</div>
+            </div>
+            <div id="item7" class="item draggable" draggable="true" data-category="취미">
+                <span class="ico-drag"></span>
+                <div>취미</div>
+            </div>
+            <div id="item8" class="item draggable" draggable="true" data-category="건강">
+                <span class="ico-drag"></span>
+                <div>건강</div>
+            </div>
+            <div id="item9" class="item draggable" draggable="true" data-category="교육">
+                <span class="ico-drag"></span>
+                <div>교육</div>
+            </div>
+            <div id="item10" class="item draggable" draggable="true" data-category="쇼핑">
+                <span class="ico-drag"></span>
+                <div>쇼핑</div>
+            </div>
+            <div id="item11" class="item draggable" draggable="true" data-category="집안일">
+                <span class="ico-drag"></span>
+                <div>집안일</div>
+            </div>
+            <div id="item12" class="item draggable" draggable="true" data-category="금융">
+                <span class="ico-drag"></span>
+                <div>금융</div>
+            </div>
+            <div id="item13" class="item draggable" draggable="true" data-category="오락">
+                <span class="ico-drag"></span>
+                <div>오락</div>
+            </div>
+            <div id="item14" class="item draggable" draggable="true" data-category="약속">
+                <span class="ico-drag"></span>
+                <div>약속</div>
+            </div>
+            <div id="item15" class="item draggable" draggable="true" data-category="기타">
+                <span class="ico-drag"></span>
+                <div>기타</div>
+            </div>
+        </div>
+        <div class="main-container">
+            <div id="copyZone" class="zone copy">
+                <p><strong>일정관리</strong></p>
+            </div>
+            <div id="deleteZone" class="zone delete">
+                <p><strong>삭제</strong></p>
+            </div>
+        </div>
+    </div>
+    <button id="saveButton" class="save-button">저장</button>
+</div>
+</body>
+</html>

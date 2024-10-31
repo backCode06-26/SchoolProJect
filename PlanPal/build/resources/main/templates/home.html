@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>나의 일정표</title>
+    <style>
+        .carousel-item {
+            height: 500px;
+        }
+
+        .row {
+            align-items: center;
+        }
+
+        .col-lg-4 {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .col-md-5 {
+            text-align: center;
+        }
+
+        .bd-placeholder-img {
+            text-anchor: middle;
+        }
+
+        .featurette-divider {
+            margin: 5rem 0;
+        }
+
+        .featurette-heading {
+            font-size: 2.5rem;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+    <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
+                <div class="container-fluid">
+                    <div class="carousel-caption text-start">
+                        <h1>오늘의 목표</h1>
+                        <p class="opacity-75">오늘 할 일 목록: 운동, 공부, 프로젝트 작업. 하루를 잘 계획해서 멋진 성과를 내보세요!</p>
+                        <p><a class="btn btn-lg btn-primary" href="/group/view">일정 확인하기</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
+                <div class="container-fluid">
+                    <div class="carousel-caption">
+                        <h1>성취한 목표</h1>
+                        <p>이번 주 성취한 목표: 운동 3회, 공부 5시간, 프로젝트 완료! 목표를 달성한 자신을 자랑하세요.</p>
+                        <p><a class="btn btn-lg btn-primary" href="#">나의 성취 확인하기</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
+                <div class="container-fluid">
+                    <div class="carousel-caption text-end">
+                        <h1>다음 목표</h1>
+                        <p>다음 주 목표: 새로운 스킬 배우기, 건강한 식습관 유지하기. 새로운 목표를 설정하고 도전하세요.</p>
+                        <p><a class="btn btn-lg btn-primary" href="/group/new">목표 설정하기</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">이전</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">다음</span>
+        </button>
+    </div>
+
+    <div class="container-fluid marketing">
+
+        <!-- 세 개의 열 -->
+        <div class="row justify-content-center">
+            <div class="col-lg-4">
+                <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <title>Placeholder</title>
+                    <defs>
+                        <clipPath id="circleView">
+                            <circle cx="70" cy="70" r="70" fill="#FFFFFF"/>
+                        </clipPath>
+                    </defs>
+                    <image xlink:href="img/planning.jpg" width="140" height="140" clip-path="url(#circleView)"/>
+                </svg>
+
+                <h2 class="fw-normal">하루의 일정</h2>
+                <p>오늘의 일정을 정리하고, 목표를 세우세요. 일정을 체계적으로 관리하는 것이 성공의 첫걸음입니다.</p>
+                <p><a class="btn btn-secondary" href="#">자세히 보기 &raquo;</a></p>
+            </div><!-- /.col-lg-4 -->
+            <div class="col-lg-4">
+                <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <title>Placeholder</title>
+                    <defs>
+                        <clipPath id="circleView">
+                            <circle cx="70" cy="70" r="70" fill="#FFFFFF"/>
+                        </clipPath>
+                    </defs>
+                    <image xlink:href="img/calendar.jpg" width="140" height="140" clip-path="url(#circleView)"/>
+                </svg>
+                <h2 class="fw-normal">성취 확인</h2>
+                <p>이번 주의 성취를 기록하고 자랑하세요. 자신이 이룬 목표들을 돌아보는 것이 중요합니다.</p>
+                <p><a class="btn btn-secondary" href="#">자세히 보기 &raquo;</a></p>
+            </div><!-- /.col-lg-4 -->
+            <div class="col-lg-4">
+                <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <title>Placeholder</title>
+                    <defs>
+                        <clipPath id="circleView">
+                            <circle cx="70" cy="70" r="70" fill="#FFFFFF"/>
+                        </clipPath>
+                    </defs>
+                    <image xlink:href="img/trip.jpg" width="140" height="140" clip-path="url(#circleView)"/>
+                </svg>
+                <h2 class="fw-normal">미래 목표</h2>
+                <p>미래의 목표와 계획을 설정하세요. 새로운 도전을 통해 성장하는 모습을 자랑해 보세요.</p>
+                <p><a class="btn btn-secondary" href="/plan/new">자세히 보기 &raquo;</a></p>
+            </div><!-- /.col-lg-4 -->
+        </div><!-- /.row -->
+
+        <!-- START THE FEATURETTES -->
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+            <div class="col-md-7">
+                <h2 class="featurette-heading fw-normal lh-1">
+                    이번 달의 하이라이트!
+                    <span class="text-body-secondary">놀라운 성과.</span>
+                </h2>
+                <p class="lead">
+                    이 달의 주요 성과를 정리하세요. 어떤 성취를 이뤘는지, 어떤 목표를 달성했는지 기록해보세요.
+                </p>
+            </div>
+            <div class="col-md-5">
+                <div class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
+                     style="background-color: #f0f0f0;"
+                     width="500" height="500">
+                </div>
+
+                <div th:if="${#lists.isEmpty(dailyEvents)}">
+                    관련 정보가 없습니다.
+                </div>
+                <div th:if="${!#lists.isEmpty(dailyEvents)}">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="event : ${dailyEvents}">
+                            <td th:text="${event.title}">Event Title</td>
+                            <td th:text="${event.description}">Event Description</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+            <div class="col-md-7 order-md-2">
+                <h2 class="featurette-heading fw-normal lh-1">도전과 성장! <span class="text-body-secondary">스스로에게 도전.</span></h2>
+                <p class="lead">자신이 설정한 도전 과제를 완료한 후의 성장 이야기를 공유하세요. 새로운 목표를 향해 나아가는 과정이 중요합니다.</p>
+            </div>
+            <div class="col-md-5 order-md-1">
+                <img th:src="@{/img/mountaineering.jpg}" alt="도전 이미지" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500px" height="500px">
+            </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+            <div class="col-md-7">
+                <h2 class="featurette-heading fw-normal lh-1">마무리와 앞으로의 계획! <span class="text-body-secondary">계획이 중요하다.</span></h2>
+                <p class="lead">마지막으로, 현재까지의 성과를 돌아보고 앞으로의 계획을 세우는 것이 중요합니다. 다음 목표를 향해 나아가세요.</p>
+            </div>
+            <div class="col-md-5">
+                <img th:src="@{/img/plan.jpg}" alt="계획 이미지" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500px" height="500px">
+            </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <!-- /END THE FEATURETTES -->
+
+    </div><!-- /.container-fluid -->
+
+</div>
+</div>
+</body>
+</html>

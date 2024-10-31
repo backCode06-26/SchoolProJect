@@ -1,0 +1,105 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #f0f2f5;
+    overflow: hidden;
+}
+
+.zone-container {
+    display: flex;
+    height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    gap: 20px;
+}
+
+.zone {
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.move {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-container {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.copy {
+    flex-grow: 1;
+    background-color: #e7f0ff;
+    border: 1px dashed #007bff;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 100%;
+    position: relative;
+}
+
+.move {
+    flex-grow: 1;
+    background-color: #e7f0ff;
+    border: 1px dashed #007bff;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 100%;
+    position: relative;
+}
+
+.delete {
+    width: 100%;
+    background-color: #ffe7e7;
+    border: 1px dashed #dc3545;
+    text-align: center;
+    padding: 20px;
+}
+
+.item:hover {
+    background-color: #0056b3;
+    transform: scale(1.04);
+}
+
+.card:hover {
+    background-color: #dadde2;
+    transform: scale(1.04);
+}
+
+.text-wrapper {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.ico-drag {
+    margin-left: auto;
+    font-size: 18px;
+    order: 2;
+    cursor: move;
+}
+
+.card-container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.card-details {
+    font-size: 14px;
+    color: #666;
+}
+
+.fa-solid {
+    text-align: left;
+}

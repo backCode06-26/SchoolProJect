@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인</title>
+
+    <style>
+        .custom-margin {
+            margin-top: 100px;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container custom-margin">
+        <h2 class="text-center mb-4">로그인</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <form th:action="@{/loginProc}" method="post">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">사용자 이름</label>
+                        <input type="text" class="form-control" id="username" name="username" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">비밀번호</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary w-100">로그인</button>
+                    </div>
+                    <div class="text-center">
+                        <a href="/signup">회원가입</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

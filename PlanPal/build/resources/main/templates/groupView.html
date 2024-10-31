@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Card List</title>
+    <style>
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .grid-item {
+            background-color: #f4f4f4;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .card-text {
+            text-align: center;
+        }
+
+        .form-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .form-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            width: 80%;
+            max-width: 500px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .btn-container {
+            text-align: right;
+        }
+
+        .toggle-form-btn {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            cursor: pointer;
+        }
+
+        h5 {
+            text-align: center;
+        }
+    </style>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // .click-btn 클래스를 가진 모든 요소를 선택
+            const clickBtns = document.querySelectorAll('.click-btn');
+
+            // 각 .click-btn 요소에 클릭 이벤트 리스너 추가
+            clickBtns.forEach(clickBtn => {
+                clickBtn.addEventListener('click', () => {
+                    // 클릭된 요소의 data-group-id 속성 값 가져오기
+                    let groupId = clickBtn.dataset.groupId;
+                    // 페이지 이동
+                    window.location.href = '/plan/add/' + groupId;
+                });
+            });
+        });
+
+
+        function toggleForm(index) {
+            const formOverlay = document.getElementById(`form-overlay-${index}`);
+            formOverlay.style.display = (formOverlay.style.display === 'flex') ? 'none' : 'flex';
+        }
+
+        function submitForm(index, groupId) {
+            const title = document.getElementById(`titleInput-${index}`).value;
+            const content = document.getElementById(`contentInput-${index}`).value;
+
+            // AJAX 요청 보내기
+            $.ajax({
+                url: '/group/update/' + groupId,
+                type: 'PUT',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    groupName: title,
+                    description: content
+                }),
+                success: function(response) {
+                    alert('제출되었습니다.');
+                    location.reload(); // 페이지 새로 고침
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                    alert('업데이트 중 오류가 발생했습니다.');
+                }
+            });
+
+        }
+
+        function deleteEvent(groupId) {
+            if (confirm('정말로 삭제하시겠습니까?')) {
+                $.ajax({
+                    url: '/group/delete/' + groupId,
+                    type: 'DELETE',
+                    success: function() {
+                        alert('삭제되었습니다.');
+                        location.reload(); // 페이지 새로 고침
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error:', error);
+                    }
+                });
+            }
+        }
+    </script>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container mt-4">
+        <!-- Thymeleaf 반복문으로 카드를 표시 -->
+        <div class="grid-container">
+            <div th:each="event, iterStat : ${events}" class="grid-item"
+                 th:id="'card-' + ${iterStat.index}" th:data-group-id="${event.groupId}">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${event.groupName}">Card title</h5>
+                    <p class="card-text" th:text="${event.description}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <div class="btn-container" th:if="${isOwner}">
+                        <!-- 수정 버튼 -->
+                        <button type="button" class="btn btn-primary" th:attr="onclick=${'toggleForm(' + iterStat.index + ')'}">수정</button>
+                        <!-- 삭제 버튼 -->
+                        <button type="button" class="btn btn-danger" th:attr="onclick=${'deleteEvent(' + event.groupId + ')'}">삭제</button>
+                    </div>
+                    <!-- 폼 토글 버튼 -->
+                    <!-- 수정된 부분 -->
+                    <i class="fa-solid fa-bars toggle-form-btn click-btn" th:data-group-id="${event.groupId}"></i>
+                </div>
+                <!-- 입력 폼 오버레이 -->
+                <div class="form-overlay" th:id="'form-overlay-' + ${iterStat.index}">
+                    <div class="form-container">
+                        <div class="form-group">
+                            <label th:attr="for='titleInput-' + ${iterStat.index}">제목:</label>
+                            <input type="text" th:attr="id='titleInput-' + ${iterStat.index}" class="form-control title-input" placeholder="제목을 입력하세요">
+                        </div>
+                        <div class="form-group">
+                            <label th:attr="for='contentInput-' + ${iterStat.index}">설명:</label>
+                            <textarea th:attr="id='contentInput-'+${iterStat.index}" class="form-control content-input" rows="3" placeholder="설명을 입력하세요"></textarea>
+                        </div>
+                        <div class="btn-container">
+                            <button class="btn btn-primary" th:attr="onclick=${'submitForm(' + iterStat.index + ', ' + event.groupId + ')'}">제출</button>
+                            <button class="btn btn-primary" th:attr="onclick=${'toggleForm(' + iterStat.index + ')'}">취소</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div th:if="${events.size() <= 0}">
+                <h5>생성된 일정그룹이 없습니다.</h5>
+            </div>
+        </div>
+        <nav aria-label="Page navigation example" th:if="${events.size() > 0}">
+            <ul class="pagination justify-content-center mt-4">
+                <li class="page-item" th:classappend="${currentPage == 1 ? 'disabled' : ''}">
+                    <a class="page-link" th:href="@{${path}(page=${currentPage - 1})}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo; 이전</span>
+                    </a>
+                </li>
+                <li class="page-item" th:each="pageNum : ${#numbers.sequence(1, totalPageCount)}" th:classappend="${pageNum == currentPage ? 'active' : ''}">
+                    <a class="page-link" th:href="@{${path}(page=${pageNum})}" th:text="${pageNum}">1</a>
+                </li>
+                <li class="page-item" th:classappend="${currentPage == totalPageCount ? 'disabled' : ''}">
+                    <a class="page-link" th:href="@{${path}(page=${currentPage + 1})}" aria-label="Next">
+                        <span aria-hidden="true">다음 &raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+</body>
+</html>
