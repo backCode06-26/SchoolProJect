@@ -1,0 +1,38 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    border-bottom: 1px solid #ddd;
+}
+
+.footer {
+    margin-top: auto;
+    padding: 15px 0;
+    text-align: center;
+    background-color: #f1f1f1;
+    border-top: 1px solid #ddd;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+.carousel-item {
+    position: relative;
+    top: 0;
+}

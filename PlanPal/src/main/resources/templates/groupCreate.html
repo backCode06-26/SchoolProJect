@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>일정 생성</title>
+    <style>
+        .custom-mt {
+            margin-top: 10rem; /* 원하는 값으로 조정 */
+        }
+    </style>
+    <!-- jQuery 라이브러리 추가 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let selectedCategory = '';
+
+            $('.dropdown-item').on('click', function() {
+                selectedCategory = $(this).data('category'); // 선택된 카테고리 저장
+                $('#dropdownMenuButton').text($(this).text()); // 버튼 텍스트 업데이트
+            });
+
+            window.createSchedule = function() {
+                const scheduleName = $('#scheduleName').val();
+                const scheduleDescription = $('#scheduleDescription').val();
+
+                console.log('Button clicked');
+                console.log('Schedule Name:', scheduleName);
+                console.log('Schedule Description:', scheduleDescription);
+                console.log('Selected Category:', selectedCategory);
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/group/create',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        groupName: scheduleName,
+                        description: scheduleDescription,
+                        category: selectedCategory
+                    }),
+                    success: function(response) {
+                        console.log('Response received:', response);
+                        alert(response.message);
+                        const groupId = response.groupId;
+                        window.location.href = `/plan/add/${groupId}`;
+                    },
+                    error: function(error) {
+                        alert('일정 생성 중 오류가 발생했습니다.');
+                        console.error('Error:', error);
+                    }
+                });
+            };
+        });
+    </script>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <div class="d-flex justify-content-center align-items-center full-height">
+        <div class="container custom-mt">
+            <div class="mb-3">
+                <label for="scheduleName" class="form-label">일정 이름</label>
+                <input type="text" class="form-control" id="scheduleName" placeholder="일정 이름을 적어주세요" required>
+            </div>
+            <div class="mb-3">
+                <label for="scheduleDescription" class="form-label">일정 설명</label>
+                <textarea class="form-control" id="scheduleDescription" placeholder="일정의 설명을 적어주세요" required></textarea>
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    카테고리 선택
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <li><a class="dropdown-item" href="#" data-category="업무">업무</a></li>
+                    <li><a class="dropdown-item" href="#" data-category="개인 개발">개인 개발</a></li>
+                    <li><a class="dropdown-item" href="#" data-category="운동">운동</a></li>
+                    <li><a class="dropdown-item" href="#" data-category="여행">여행</a></li>
+                    <li><a class="dropdown-item" href="#" data-category="사회 활동">사회 활동</a></li>
+                    <li><a class="dropdown-item" href="#" data-category="가족">가족</a></li>
+                    <li><a class="dropdown-item" href="#" data-category="취미">취미</a></li>
+                    <li><a class="dropdown-item" href="#" data-category="건강">건강</a></li>
+                    <li><a class="dropdown-item" href="#" data-category="교육">교육</a></li>
+                    <li><a class="dropdown-item" href="#" data-category="쇼핑">쇼핑</a></li>
+                    <li><a class="dropdown-item" href="#" data-category="집안일">집안일</a></li>
+                    <li><a class="dropdown-item" href="#" data-category="금융">금융</a></li>
+                    <li><a class="dropdown-item" href="#" data-category="오락">오락</a></li>
+                    <li><a class="dropdown-item" href="#" data-category="약속">약속</a></li>
+                    <li><a class="dropdown-item" href="#" data-category="기타">기타</a></li>
+                </ul>
+            </div>
+            <div class="col-12 d-flex justify-content-end">
+                <button id="submitButton" class="btn btn-primary" onclick="createSchedule()">일정 생성</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
