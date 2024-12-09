@@ -1,45 +1,47 @@
 <template>
-  <div :style="divStyle">
-    <vue-draggable-resizable
-      :w="width"
-      :h="height"
-      :parent="true"
-      :active="isActive"
-      @resize="onResize"
-      class="box"
-    >
-      <input type="text" v-model="texts" placeholder="Enter some text" />
-    </vue-draggable-resizable>
+  <div class="card">
+    <div class="card-content" v-if="userInfo">
+      <h2>{{ userInfo.lastName + "" + userInfo.firstName }}</h2>
+      <p>전화번호 : {{ userInfo.phoneWork }}</p>
+      <p>이메일 : {{ userInfo.email || "null" }}</p>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
-import VueDraggableResizable from "vue-draggable-resizable";
+import { ref, onMounted } from "vue";
 
-const isActive = ref(true);
-const texts = ref([]); // 'texts'는 배열로 초기화
+// userInfo 변수를 ref로 선언하여 반응형으로 만듭니다.
+const userInfo = ref(null);
 
-const onResize = (newWidth, newHeight) => {
-  console.log("Resized to:", newWidth, newHeight);
-};
-
-const width = ref(340);
-const height = ref(189);
-
-// computed를 사용해 divStyle을 동적으로 계산
-const divStyle = computed(() => ({
-  position: "relative",
-  width: `${width.value * 2}px`, // width를 동적으로 설정
-  height: `${height.value * 2}px`, // height를 동적으로 설정
-  border: "1px solid blue",
-  margin: "1em auto",
-  "box-sizing": "border-box",
-}));
+onMounted(() => {
+  // 세션 스토리지에서 정보 불러오기
+  const storedUserInfo = JSON.parse(sessionStorage.getItem("userInfoSave"));
+  if (storedUserInfo) {
+    userInfo.value = storedUserInfo;
+  }
+});
 </script>
 
 <style scoped>
-.box {
-  border: 1px solid red;
+.tel-container {
+  margin: 10px;
+}
+.tel-container label {
+  margin-right: 10px;
+}
+
+.card {
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin: 20px auto;
+  border-radius: 8px;
+  max-width: 400px;
+}
+.card-content h2 {
+  margin: 0 0 10px 0;
+}
+.card-content p {
+  margin: 5px 0;
 }
 </style>
