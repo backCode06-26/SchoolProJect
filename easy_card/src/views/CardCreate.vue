@@ -1,9 +1,18 @@
 <template>
   <div class="card">
-    <div class="card-content" v-if="userInfo">
+    <div
+      v-if="userInfo"
+      class="card-content"
+    >
       <h2>{{ userInfo.lastName + "" + userInfo.firstName }}</h2>
       <p>전화번호 : {{ userInfo.phoneWork }}</p>
       <p>이메일 : {{ userInfo.email || "null" }}</p>
+    </div>
+    <div
+      v-else
+      style="color: red"
+    >
+      정보를 입력해주세요.
     </div>
   </div>
 </template>

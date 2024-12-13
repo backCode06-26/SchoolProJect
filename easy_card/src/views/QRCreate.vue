@@ -3,7 +3,6 @@ import { onMounted, ref } from "vue";
 import QRCode from "qrcode";
 import vCardsJS from "vcards-js";
 
-// 반응형 변수 설정
 const vCardData = ref("");
 const errorMessage = ref(""); // 오류 메시지를 저장할 변수
 
@@ -51,9 +50,16 @@ onMounted(() => {
 
 <template>
   <h2>QR 생성</h2>
-  <canvas id="qrcode" width="256" height="256"></canvas>
+  <canvas
+    id="qrcode"
+    width="256"
+    height="256"
+  />
   <!-- 오류 메시지 출력 영역 -->
-  <div v-if="errorMessage" style="color: red; text-align: center">
+  <div
+    v-if="errorMessage"
+    style="color: red; text-align: center"
+  >
     {{ errorMessage }}
   </div>
 </template>

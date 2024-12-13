@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import QRCreate from "@/views/QRCreate.vue";
 import UserInfo from "@/views/UserInfo.vue";
-import CardCreate from "@/views/CardCreate.vue";
+import CardCreate from "@/views/CardCreate1.vue";
 
 const routes = [
   {

@@ -1,19 +1,36 @@
 <template>
   <header id="header">
-    <h1><router-link to="/">EasyCard</router-link></h1>
-    <router-link to="/card_create"
-      ><font-awesome-icon :icon="['fas', 'gear']" class="custom-class"
-    /></router-link>
+    <h1>
+      <router-link to="/">
+        EasyCard
+      </router-link>
+    </h1>
+    <router-link to="/card_create">
+      <font-awesome-icon
+        :icon="['fas', 'gear']"
+        class="custom-class"
+      />
+    </router-link>
   </header>
-  <hr />
+  <hr>
   <nav id="nav">
     <ul>
-      <li><router-link to="/qr_create">QR Code 생성</router-link></li>
-      <li><router-link to="/user_info">사용자 정보</router-link></li>
+      <li>
+        <router-link to="/qr_create">
+          QR Code 생성
+        </router-link>
+      </li>
+      <li>
+        <router-link to="/user_info">
+          사용자 정보
+        </router-link>
+      </li>
     </ul>
   </nav>
   <router-view />
 </template>
+
+<script setup></script>
 
 <style>
 @import "vue-draggable-resizable/dist/style.css";
@@ -58,5 +75,3 @@ nav a.router-link-exact-active {
   color: #42b983;
 }
 </style>
-
-<script setup></script>
