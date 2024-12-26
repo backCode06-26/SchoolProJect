@@ -1,0 +1,26 @@
+{{>layout/header}}
+
+<h1>Article Details</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Content</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#articlesList}}
+        <tr>
+            <td>{{id}}</td>
+            <td><a href="/article/{{id}}">{{title}}</a></td>
+            <td>{{content}}</td>
+        </tr>
+    {{/articlesList}}
+    </tbody>
+</table>
+
+<a href="/article/new">New Article</a>
+
+{{>layout/footer}}

@@ -1,0 +1,3 @@
+// 서버관련 설정을 수정 할 때 사용합니다.
+
+rootProject.name = 'fristpreject'

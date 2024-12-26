@@ -1,0 +1,29 @@
+{{>layout/header}}
+
+<h1>Article Details</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Content</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#article}}
+    <tr>
+        <td>{{id}}</td>
+        <td>{{title}}</td>
+        <td>{{content}}</td>
+    </tr>
+    {{/article}}
+    </tbody>
+</table>
+
+<button type="button" class="btn btn-primary" onclick="location.href='/article/{{article.id}}/edit'">Edit</button>
+<button type="button" onclick="location.href='/article/{{id}}/delete'" class="btn btn-primary">Delete</button>
+<a href="/article/{{article.id}}">Back</a>
+
+{{>comments/_comments}}
+{{>layout/footer}}
